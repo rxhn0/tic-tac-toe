@@ -2,6 +2,7 @@ from random import randint as rd
 
 BOARD = [[" ", " ", " "], [" ", " ", " "], [" ", " ", " "]]
 TEAMS = ["X", "O"]
+draw_check = 0
 
 def show_board():
     print(f"  {BOARD[0][0]}  | {BOARD[0][1]}  | {BOARD[0][2]}")
@@ -130,11 +131,12 @@ def main_loop(user_name):
 		else:
 			print("Place between 'a-i' only!")
 
-		draw_check += 1
 		show_board()
 		if decide_result(usr_team, bot_team, draw_check):
 			print(decide_result(usr_team, bot_team, draw_check))
+			draw_check += 1
 			break
+		
 
 def bot_response(usr_team, bot_team):
 	while True:
@@ -185,7 +187,7 @@ def decide_result(usr_team, bot_team, draw_check):
 		return (f'{bot_team} won the game!')
 
 	# Draw
-	if draw_check > 3:
+	if draw_check >= 4:
 		if usr_team != BOARD[0][0] and usr_team != BOARD[0][1] and usr_team != BOARD[0][2]:
 			return 'The game is drawn!'
 		if usr_team != BOARD[1][0] and usr_team != BOARD[1][1] and usr_team != BOARD[1][2]:
